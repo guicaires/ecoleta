@@ -1,37 +1,37 @@
-# Product Name
-> Short blurb about what your product does.
+<p align="center">
+    <img src=".github/img/logo.svg"></img>
+</p>
 
-[![NPM Version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
-[![Downloads Stats][npm-downloads]][npm-url]
+# Ecoleta API
+> Performs the registration and listing of collection points and items for recycling.
 
-One to two paragraph statement about your product and what it does.
+[![Code Size][code-size]][code-url]
+[![MIT License][MIT-license]][MIT-url]
+[![Version][version]][version-url]
+
+Restful Node API responsible for registering and listing collection points and recycling items.
 
 🇧🇷 [Portuguese version](./.github/README-PT-BR.md)
 
-<p align="center">
-    <img src=".github/img/header.png"></img>
-</p>
-
 ## :dart: Objective
 
-Talk a little about the purpose of your project.
+This project, motivated by the National Day of Recycling (June 5), aims to encourage and remember the importance of caring for the environment.  Bringing a solution through the registration of recycling points.
 
 ## :black_nib: Justification
 
-Is there any justification for why you developed this project?
+This project was developed during RocketSeat's first Next Level Week.  It was developed for study purposes, where it was possible to learn more about Node.js and to build a Rest API.
 
 ## :construction_worker: Installation
 
 Clone repository:
 
 ```git
-git clone https://github.com/gcairesdev/project
+git clone https://github.com/gcairesdev/ecoleta-back
 ```
 
 ## 👨‍🏫 Usage example
 
-A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
+To do...
 
 ## 👨🏼‍💻 Author
 
@@ -54,8 +54,11 @@ Distributed under the MIT license. See [LICENSE](.github/LICENSE.md) for more in
 </p>
 
 <!-- Markdown link & img dfn's -->
-[npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/datadog-metrics
-[npm-downloads]: https://img.shields.io/npm/dm/datadog-metrics.svg?style=flat-square
-[travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
-[travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
+[code-size]: https://img.shields.io/github/languages/code-size/gcairesdev/ecoleta-back
+[code-url]: https://github.com/gcairesdev/ecoleta-back
+
+[MIT-license]: https://img.shields.io/github/license/gcairesdev/ecoleta-back
+[MIT-url]: https://github.com/gcairesdev/ecoleta-back/blob/master/LICENSE.md
+
+[version]: https://img.shields.io/github/v/release/gcairesdev/ecoleta-back?include_prereleases
+[version-url]: https://github.com/gcairesdev/ecoleta-back
