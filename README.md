@@ -2,14 +2,15 @@
     <img src=".github/img/logo.svg"></img>
 </p>
 
-# Ecoleta API
+# ♻️ Ecoleta
+
 > Performs the registration and listing of collection points and items for recycling.
 
 [![Code Size][code-size]][code-url]
 [![MIT License][MIT-license]][MIT-url]
 [![Version][version]][version-url]
 
-Restful Node API responsible for registering and listing collection points and recycling items.
+Ecoleta is an environmental project responsible for registering and listing collection points for product recycling, in order to help the environment.
 
 🇧🇷 [Portuguese version](./.github/README-PT-BR.md)
 
@@ -19,14 +20,14 @@ This project, motivated by the National Day of Recycling (June 5), aims to encou
 
 ## :black_nib: Justification
 
-This project was developed during RocketSeat's first Next Level Week.  It was developed for study purposes, where it was possible to learn more about Node.js and to build a Rest API.
+This project was developed during RocketSeat's first Next Level Week.  It was carried out for study purposes, where it was possible to learn more about Node, React and React Native.
 
 ## :construction_worker: Installation
 
 Clone repository:
 
 ```git
-git clone https://github.com/gcairesdev/ecoleta-back
+git clone https://github.com/gcairesdev/ecoleta
 ```
 
 ## 👨‍🏫 Usage example
@@ -54,11 +55,11 @@ Distributed under the MIT license. See [LICENSE](.github/LICENSE.md) for more in
 </p>
 
 <!-- Markdown link & img dfn's -->
-[code-size]: https://img.shields.io/github/languages/code-size/gcairesdev/ecoleta-back
-[code-url]: https://github.com/gcairesdev/ecoleta-back
+[code-size]: https://img.shields.io/github/languages/code-size/gcairesdev/ecoleta
+[code-url]: https://github.com/gcairesdev/ecoleta
 
-[MIT-license]: https://img.shields.io/github/license/gcairesdev/ecoleta-back
-[MIT-url]: https://github.com/gcairesdev/ecoleta-back/blob/master/LICENSE.md
+[MIT-license]: https://img.shields.io/github/license/gcairesdev/ecoleta
+[MIT-url]: https://github.com/gcairesdev/ecoleta/blob/master/LICENSE.md
 
-[version]: https://img.shields.io/github/v/release/gcairesdev/ecoleta-back?include_prereleases
-[version-url]: https://github.com/gcairesdev/ecoleta-back
+[version]: https://img.shields.io/github/v/release/gcairesdev/ecoleta?include_prereleases
+[version-url]: https://github.com/gcairesdev/ecoleta
