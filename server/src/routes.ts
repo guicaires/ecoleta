@@ -8,12 +8,35 @@ routes.get('/items', async (req, res) => {
 
   const serializedItems = items.map(item => {
     return {
-      name: item.title,
+      id: item.id,
+      title: item.title,
       image_url: `http://localhost:3333/uploads/${item.image}`,
     };
   });
 
   return res.json(serializedItems);
+});
+
+routes.post('/points', async (req, res) => {
+  const { name, email, whatsapp, longitude, latitude, city, uf, items } = req.body;
+
+  const trx = await knex.transaction();
+
+  const insertedIds = await trx('points').insert({
+    image: 'image-fake', name, email, whatsapp, longitude, latitude, city, uf
+  });
+
+  const point_id = insertedIds[0];
+
+  const pointItems = items.map((item_id: number) => {
+    return { point_id, item_id };
+  });
+
+  await trx('point_items').insert(pointItems);
+
+  await trx.commit();
+
+  return res.json({ status: 'ok' });
 });
 
 export default routes;
