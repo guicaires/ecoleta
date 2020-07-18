@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import api from '../../services/api';
 
 import './styles.css';
 
 import logo from '../../assets/logo.svg';
 
+interface Item {
+  id: number;
+  title: string;
+  image_url: string;
+}
+
 const CreatePoint = () => {
+  const [items, setItems] = useState<Item[]>([]);
+
+  useEffect(() => {
+    api.get('items').then(res => {
+      setItems(res.data)
+    })
+  }, []);
+
   return (
     <div id="page-create-point">
       <header>
@@ -84,30 +99,12 @@ const CreatePoint = () => {
           </legend>
 
           <ul className="items-grid">
-            <li>
-              <img src="http://localhost:3333/uploads/oleo.svg" alt=""/>
-              <span>Óleo de cozinha</span>
-            </li>
-            <li className="selected">
-              <img src="http://localhost:3333/uploads/baterias.svg" alt=""/>
-              <span>Pilhas e baterias</span>
-            </li>
-            <li>
-              <img src="http://localhost:3333/uploads/eletronicos.svg" alt=""/>
-              <span>Eletrônicos</span>
-            </li>
-            <li>
-              <img src="http://localhost:3333/uploads/lampadas.svg" alt=""/>
-              <span>Lâmpadas</span>
-            </li>
-            <li>
-              <img src="http://localhost:3333/uploads/organicos.svg" alt=""/>
-              <span>Orgânicos</span>
-            </li>
-            <li>
-              <img src="http://localhost:3333/uploads/papeis-papelao.svg" alt=""/>
-              <span>Papéis e papelão</span>
-            </li>
+            {items.map(item => (
+              <li key={item.id}>
+                <img src={item.image_url} alt={item.title}/>
+                <span>{item.title}</span>
+              </li>
+            ))}
           </ul>
         </fieldset>
 
