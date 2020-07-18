@@ -17,7 +17,7 @@ const Home = () => {
           <h1>Seu marketplace de coleta de resíduos.</h1>
           <p>Ajudamos pessoas a encontrarem ponto de coleta de forma eficiente.</p>
 
-          <a href="/cadastro">
+          <a href="/criar-ponto">
             <span>
               <FiLogIn />
             </span>
