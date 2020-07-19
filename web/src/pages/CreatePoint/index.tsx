@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import axios from 'axios';
 import api from '../../services/api';
 
 import './styles.css';
@@ -14,14 +15,43 @@ interface Item {
   image_url: string;
 }
 
+interface ibgeCityResponse {
+  nome: string;
+}
+
 const CreatePoint = () => {
   const [items, setItems] = useState<Item[]>([]);
+  const [cities, setCities] = useState<string[]>([]);
+
+  const [selectedUF, setSelectedUF] = useState('0');
+  const [selectedCity, setSelectedCity] = useState('0');
 
   useEffect(() => {
     api.get('items').then(res => {
       setItems(res.data)
     })
   }, []);
+
+  useEffect(() => {
+    if (selectedUF === '0') return;
+
+    axios
+      .get<ibgeCityResponse[]>(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUF}/municipios`)
+      .then(res => {
+        const citiesNames = res.data.map(city => city.nome);
+        setCities(citiesNames);
+      })
+  }, [selectedUF]);
+
+  const handleSelectUF = (event: ChangeEvent<HTMLSelectElement>) => {
+    const uf = event.target.value;
+    setSelectedUF(uf);
+  }
+
+  const handleSelectCity = (event: ChangeEvent<HTMLSelectElement>) => {
+    const city = event.target.value;
+    setSelectedCity(city);
+  }
 
   return (
     <div id="page-create-point">
@@ -78,15 +108,54 @@ const CreatePoint = () => {
           <div className="field-group">
             <div className="field">
               <label htmlFor="uf">Estado (UF)</label>
-              <select name="uf" id="uf">
+              <select
+                id="uf"
+                name="uf"
+                value={selectedUF}
+                onChange={handleSelectUF}
+              >
                 <option value="0">Selecione uma UF</option>
+                <option value="AC">AC</option>
+                <option value="AL">AL</option>
+                <option value="AP">AP</option>
+                <option value="AM">AM</option>
+                <option value="BA">BA</option>
+                <option value="CE">CE</option>
+                <option value="DF">DF</option>
+                <option value="ES">ES</option>
+                <option value="GO">GO</option>
+                <option value="MA">MA</option>
+                <option value="MT">MT</option>
+                <option value="MS">MS</option>
+                <option value="MG">MG</option>
+                <option value="PA">PA</option>
+                <option value="PB">PB</option>
+                <option value="PR">PR</option>
+                <option value="PE">PE</option>
+                <option value="PI">PI</option>
+                <option value="RJ">RJ</option>
+                <option value="RN">RN</option>
+                <option value="RS">RS</option>
+                <option value="RO">RO</option>
+                <option value="RR">RR</option>
+                <option value="SC">SC</option>
+                <option value="SP">SP</option>
+                <option value="SE">SE</option>
+                <option value="TO">TO</option>
               </select>
             </div>
 
             <div className="field">
               <label htmlFor="city">Cidade</label>
-              <select name="city" id="city">
+              <select
+                id="city"
+                name="city"
+                onChange={handleSelectCity}
+              >
                 <option value="0">Selecione uma cidade</option>
+                {cities.map(city => (
+                  <option key={city} value={city}>{city}</option>
+                ))}
               </select>
             </div>
           </div>
