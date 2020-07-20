@@ -26,6 +26,12 @@ const CreatePoint = () => {
   const [selectedUF, setSelectedUF] = useState('0');
   const [selectedCity, setSelectedCity] = useState('0');
 
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    whatsapp: ''
+  });
+
   useEffect(() => {
     api.get('items').then(res => {
       setItems(res.data)
@@ -53,6 +59,12 @@ const CreatePoint = () => {
     setSelectedCity(city);
   }
 
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>)=> {
+    const { name, value } = event.target;
+
+    setFormData({...formData, [name]: value});
+  }
+
   return (
     <div id="page-create-point">
       <header>
@@ -74,18 +86,18 @@ const CreatePoint = () => {
 
           <div className="field">
             <label htmlFor="name">Nome da entidade</label>
-            <input type="text" name="name" id="name"/>
+            <input type="text" name="name" id="name" onChange={handleInputChange} />
           </div>
 
           <div className="field-group">
             <div className="field">
               <label htmlFor="email">E-mail</label>
-              <input type="email" name="email" id="email"/>
+              <input type="email" name="email" id="email" onChange={handleInputChange} />
             </div>
 
             <div className="field">
               <label htmlFor="whatsapp">WhatsApp</label>
-              <input type="text" name="whatsapp" id="whatsapp"/>
+              <input type="text" name="whatsapp" id="whatsapp" onChange={handleInputChange} />
             </div>
           </div>
         </fieldset>
