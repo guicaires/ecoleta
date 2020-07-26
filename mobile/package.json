@@ -25,7 +25,8 @@
     "react-native-screens": "~2.9.0",
     "react-native-web": "~0.11.7",
     "react-native-maps": "0.27.1",
-    "expo-constants": "~9.1.1"
+    "expo-constants": "~9.1.1",
+    "react-native-svg": "12.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
