@@ -1,15 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, TouchableOpacity, Text, ScrollView, Image } from 'react-native';
 
 import MapView, { Marker } from 'react-native-maps';
 import { useNavigation } from '@react-navigation/native';
 import { Feather as Icon } from '@expo/vector-icons';
 import { SvgUri } from 'react-native-svg';
+import api from '../../services/api';
 
 import styles from './styles';
 
+interface Item {
+  id: number;
+  title: string;
+  image_url: string;
+}
+
 const Points = () => {
+  const [items, setItems] = useState<Item[]>([]);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    api.get('items').then(res => {
+      setItems(res.data);
+    });
+  }, []);
+
 
   const handleNavigateBack = () => {
     navigation.goBack();
@@ -64,30 +79,17 @@ const Points = () => {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingHorizontal: 20 }}
         >
-          <TouchableOpacity style={styles.item}>
-            <SvgUri width={42} height={42} uri='http://10.10.10.7:3333/uploads/baterias.svg' />
-            <Text style={styles.itemTitle}>Pilhas e baterias</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.item}>
-            <SvgUri width={42} height={42} uri='http://10.10.10.7:3333/uploads/baterias.svg' />
-            <Text style={styles.itemTitle}>Pilhas e baterias</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.item}>
-            <SvgUri width={42} height={42} uri='http://10.10.10.7:3333/uploads/baterias.svg' />
-            <Text style={styles.itemTitle}>Pilhas e baterias</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.item}>
-            <SvgUri width={42} height={42} uri='http://10.10.10.7:3333/uploads/baterias.svg' />
-            <Text style={styles.itemTitle}>Pilhas e baterias</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.item}>
-            <SvgUri width={42} height={42} uri='http://10.10.10.7:3333/uploads/baterias.svg' />
-            <Text style={styles.itemTitle}>Pilhas e baterias</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.item}>
-            <SvgUri width={42} height={42} uri='http://10.10.10.7:3333/uploads/baterias.svg' />
-            <Text style={styles.itemTitle}>Pilhas e baterias</Text>
-          </TouchableOpacity>
+          {items.map(item => (
+            <TouchableOpacity
+              key={item.id}
+              style={styles.item}
+              activeOpacity={0.4}
+            >
+              <SvgUri width={42} height={42} uri={item.image_url} />
+              <Text style={styles.itemTitle}>{item.title}</Text>
+            </TouchableOpacity>
+          ))}
+
         </ScrollView>
       </View>
     </>
