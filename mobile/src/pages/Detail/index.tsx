@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Image, Text, SafeAreaView } from 'react-native';
+import { View, Image, Text, SafeAreaView, Linking } from 'react-native';
 import { TouchableOpacity, RectButton } from 'react-native-gesture-handler';
 import { Feather as Icon, FontAwesome } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -50,6 +50,12 @@ const Detail = () => {
     });
   }
 
+  const handleWhatsapp = () => {
+    const text = 'Olá! Tenho interresse na coleta de resíduos.';
+
+    Linking.openURL(`whatsapp://send?phone=${point.whatsapp}&text=${text}`);
+  }
+
   if (!point.name) return null;
 
   return (
@@ -76,7 +82,7 @@ const Detail = () => {
         </View>
       </View>
       <View style={styles.footer}>
-        <RectButton style={styles.button} onPress={() => {}}>
+        <RectButton style={styles.button} onPress={handleWhatsapp}>
           <FontAwesome name='whatsapp' size={20} color='#FFF' />
           <Text style={styles.buttonText}>WhatsApp</Text>
         </RectButton>
