@@ -17,6 +17,7 @@ interface Item {
 
 const Points = () => {
   const [items, setItems] = useState<Item[]>([]);
+  const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -25,6 +26,16 @@ const Points = () => {
     });
   }, []);
 
+  const handleSelectItem = (id: number) => {
+    const alreadySelected = selectedItems.findIndex(item => item === id);
+
+    if (alreadySelected >= 0) {
+      const filteredItems = selectedItems.filter(item => item !== id);
+      return setSelectedItems(filteredItems);
+    }
+
+    return setSelectedItems([...selectedItems, id]);
+  }
 
   const handleNavigateBack = () => {
     navigation.goBack();
@@ -82,7 +93,11 @@ const Points = () => {
           {items.map(item => (
             <TouchableOpacity
               key={item.id}
-              style={styles.item}
+              style={[
+                styles.item,
+                selectedItems.includes(item.id) ? styles.selectedItem : {}
+              ]}
+              onPress={() => {handleSelectItem(item.id)}}
               activeOpacity={0.4}
             >
               <SvgUri width={42} height={42} uri={item.image_url} />
