@@ -16,8 +16,17 @@ interface Item {
   image_url: string;
 }
 
+interface Points {
+  id: number;
+  name: string;
+  image: string;
+  latitude: number;
+  longitude: number;
+}
+
 const Points = () => {
   const [items, setItems] = useState<Item[]>([]);
+  const [points, setPoints] = useState<Points[]>([]);
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const [initialPosition, setInitialPosition] = useState<[number, number]>([0,0]);
 
@@ -28,6 +37,16 @@ const Points = () => {
       setItems(res.data);
     });
   }, []);
+
+  useEffect(() => {
+    api.get('points', {
+      params: {
+        uf: 'BA',
+        city: 'Vera Cruz',
+        items: [1, 2],
+      }
+    }).then(res => setPoints(res.data));
+  },[]);
 
   useEffect(() => {
     async function loadPosition() {
@@ -69,8 +88,8 @@ const Points = () => {
     navigation.goBack();
   }
 
-  const handleNavigateToDetail = () =>{
-    navigation.navigate('Detail');
+  const handleNavigateToDetail = (id: number) =>{
+    navigation.navigate('Detail', { id });
   }
 
   return(
@@ -97,19 +116,22 @@ const Points = () => {
                 longitudeDelta: 0.014,
               }}
             >
-              <Marker
-                style={styles.mapMarker}
-                onPress={handleNavigateToDetail}
-                coordinate={{ latitude: -12.977294, longitude: -38.454218 }}
-              >
-                <View style={styles.mapMarkerContainer}>
-                  <Image
-                    style={styles.mapMarkerImage}
-                    source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTzaYnUlDZGm9lj6E59De86z4yELnKSPh5_qw&usqp=CAU' }}
-                  />
-                  <Text style={styles.mapMarkerTitle}>Mercado</Text>
-                </View>
-              </Marker>
+              {points.map(({id, name, image, latitude, longitude}) => (
+                <Marker
+                  key={String(id)}
+                  style={styles.mapMarker}
+                  onPress={() => handleNavigateToDetail(id)}
+                  coordinate={{latitude, longitude}}
+                >
+                  <View style={styles.mapMarkerContainer}>
+                    <Image
+                      style={styles.mapMarkerImage}
+                      source={{ uri: image }}
+                    />
+                    <Text style={styles.mapMarkerTitle}>{name}</Text>
+                  </View>
+                </Marker>
+              ))}
             </MapView>
           ) }
         </View>
