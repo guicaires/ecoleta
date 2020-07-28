@@ -3,9 +3,11 @@ import { View, Image, Text, SafeAreaView } from 'react-native';
 import { TouchableOpacity, RectButton } from 'react-native-gesture-handler';
 import { Feather as Icon, FontAwesome } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { composeAsync } from 'expo-mail-composer';
 
 import styles from './styles' ;
 import api from '../../services/api';
+import Points from '../Points';
 
 interface Params {
   point_id: number;
@@ -41,6 +43,13 @@ const Detail = () => {
     navigation.goBack();
   }
 
+  const handleSendMail = () => {
+    composeAsync({
+      subject: 'Interesse na coleta de resíduos',
+      recipients: [point.email],
+    });
+  }
+
   if (!point.name) return null;
 
   return (
@@ -72,7 +81,7 @@ const Detail = () => {
           <Text style={styles.buttonText}>WhatsApp</Text>
         </RectButton>
 
-        <RectButton style={styles.button} onPress={() => {}}>
+        <RectButton style={styles.button} onPress={handleSendMail}>
           <Icon name='mail' size={20} color='#FFF' />
           <Text style={styles.buttonText}>E-mail</Text>
         </RectButton>
