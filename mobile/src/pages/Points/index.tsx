@@ -89,7 +89,7 @@ const Points = () => {
   }
 
   const handleNavigateToDetail = (id: number) =>{
-    navigation.navigate('Detail', { id });
+    navigation.navigate('Detail', { point_id: id });
   }
 
   return(

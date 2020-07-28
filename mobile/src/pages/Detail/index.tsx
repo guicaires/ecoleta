@@ -1,17 +1,47 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Image, Text, SafeAreaView } from 'react-native';
 import { TouchableOpacity, RectButton } from 'react-native-gesture-handler';
 import { Feather as Icon, FontAwesome } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import styles from './styles' ;
+import api from '../../services/api';
+
+interface Params {
+  point_id: number;
+}
+
+interface Point {
+  name: string;
+  image: string;
+  email: string;
+  whatsapp: string;
+  uf: string;
+  city: string;
+  items: {
+    title: string;
+  }[];
+}
 
 const Detail = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+
+  const [point, setPoint] = useState<Point>({} as Point);
+
+  const routeParams = route.params as Params;
+
+  useEffect(() => {
+    const { point_id } = routeParams;
+
+    api.get(`points/${point_id}`).then(res => setPoint(res.data));
+  }, []);
 
   const handleNavigateBack = () => {
     navigation.goBack();
   }
+
+  if (!point.name) return null;
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -22,14 +52,18 @@ const Detail = () => {
 
         <Image
           style={styles.pointImage}
-          source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTzaYnUlDZGm9lj6E59De86z4yELnKSPh5_qw&usqp=CAU' }}
+          source={{ uri: point.image }}
         />
-        <Text style={styles.pointName}>Mercado</Text>
-        <Text style={styles.pointItems}>Lâmpadas, óleo de cozinha</Text>
+        <Text style={styles.pointName}>{point.name}</Text>
+        <Text style={styles.pointItems}>
+          {point.items.map(item => item.title).join(', ')}
+        </Text>
 
         <View style={styles.address}>
           <Text style={styles.addressTitle}>Endereço</Text>
-          <Text style={styles.addressContent}>Salvador, BA</Text>
+          <Text style={styles.addressContent}>
+            {point.city + ', ' + point.uf}
+          </Text>
         </View>
       </View>
       <View style={styles.footer}>
