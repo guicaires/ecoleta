@@ -28,15 +28,6 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
 
-  input: {
-    height: 60,
-    backgroundColor: '#FFF',
-    borderRadius: 10,
-    marginBottom: 8,
-    paddingHorizontal: 24,
-    fontSize: 16,
-  },
-
   button: {
     backgroundColor: '#34CB79',
     height: 60,
@@ -67,4 +58,23 @@ const styles = StyleSheet.create({
   }
 });
 
-export default styles;
+const pickerStyle = {
+  inputIOS: {
+    height: 60,
+    backgroundColor: '#FFF',
+    borderRadius: 10,
+    marginBottom: 8,
+    paddingHorizontal: 24,
+    fontSize: 16,
+  },
+	inputAndroid: {
+    height: 60,
+    backgroundColor: '#FFF',
+    borderRadius: 10,
+    marginBottom: 8,
+    paddingHorizontal: 24,
+    fontSize: 16,
+  },
+};
+
+export {styles, pickerStyle};
