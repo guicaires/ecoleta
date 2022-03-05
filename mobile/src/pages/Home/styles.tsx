@@ -59,22 +59,12 @@ const styles = StyleSheet.create({
 });
 
 const pickerStyle = {
-  inputIOS: {
-    height: 60,
-    backgroundColor: '#FFF',
-    borderRadius: 10,
-    marginBottom: 8,
-    paddingHorizontal: 24,
-    fontSize: 16,
-  },
-	inputAndroid: {
-    height: 60,
-    backgroundColor: '#FFF',
-    borderRadius: 10,
-    marginBottom: 8,
-    paddingHorizontal: 24,
-    fontSize: 16,
-  },
+  height: 60,
+  backgroundColor: '#FFF',
+  borderRadius: 10,
+  marginBottom: 8,
+  paddingHorizontal: 24,
+  fontSize: 16,
 };
 
 export {styles, pickerStyle};

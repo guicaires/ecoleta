@@ -4,7 +4,7 @@ import { RectButton } from 'react-native-gesture-handler';
 import { Feather as Icon } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
-import RNPickerSelect from 'react-native-picker-select';
+import { Picker } from '@react-native-picker/picker';
 
 import {styles, pickerStyle} from './styles';
 
@@ -58,48 +58,50 @@ const Home = () => {
       </View>
 
       <View>
-        <RNPickerSelect
-          style={pickerStyle}
+        <Picker
+          selectedValue={selectedUF}
           onValueChange={setSelectedUF}
-          useNativeAndroidPickerStyle={false}
-          placeholder={{ label: 'Estado', value: '0' }}
-          items={[
-            { label: 'AC', value: 'AC' },
-            { label: 'AL', value: 'AL' },
-            { label: 'AP', value: 'AP' },
-            { label: 'AM', value: 'AM' },
-            { label: 'BA', value: 'BA' },
-            { label: 'CE', value: 'CE' },
-            { label: 'DF', value: 'DF' },
-            { label: 'ES', value: 'ES' },
-            { label: 'GO', value: 'GO' },
-            { label: 'MA', value: 'MA' },
-            { label: 'MT', value: 'MT' },
-            { label: 'MS', value: 'MS' },
-            { label: 'MG', value: 'MG' },
-            { label: 'PA', value: 'PA' },
-            { label: 'PB', value: 'PB' },
-            { label: 'PR', value: 'PR' },
-            { label: 'PE', value: 'PE' },
-            { label: 'PI', value: 'PI' },
-            { label: 'RJ', value: 'RJ' },
-            { label: 'RN', value: 'RN' },
-            { label: 'RS', value: 'RS' },
-            { label: 'RO', value: 'RO' },
-            { label: 'RR', value: 'RR' },
-            { label: 'SC', value: 'SC' },
-            { label: 'SP', value: 'SP' },
-            { label: 'SE', value: 'SE' },
-            { label: 'TO', value: 'TO' },
-          ]}
-        />
-        <RNPickerSelect
           style={pickerStyle}
+        >
+          <Picker.Item label="Selecione um estado" value="0" />
+          <Picker.Item label='Acre' value='AC' />
+          <Picker.Item label='Alagoas' value='AL' />
+          <Picker.Item label='Amapá' value='AP' />
+          <Picker.Item label='Amazonas' value='AM' />
+          <Picker.Item label='Bahia' value='BA' />
+          <Picker.Item label='Ceará' value='CE' />
+          <Picker.Item label='Distrito Federal' value='DF' />
+          <Picker.Item label='Espírito Santo' value='ES' />
+          <Picker.Item label='Goiás' value='GO' />
+          <Picker.Item label='Maranhão' value='MA' />
+          <Picker.Item label='Mato Grosso' value='MT' />
+          <Picker.Item label='Mato Grosso do Sul' value='MS' />
+          <Picker.Item label='Minas Gerais' value='MG' />
+          <Picker.Item label='Pará' value='PA' />
+          <Picker.Item label='Paraíba' value='PB' />
+          <Picker.Item label='Paraná' value='PR' />
+          <Picker.Item label='Pernambuco' value='PE' />
+          <Picker.Item label='Piauí' value='PI' />
+          <Picker.Item label='Rio de Janeiro' value='RJ' />
+          <Picker.Item label='Rio Grande do Norte' value='RN' />
+          <Picker.Item label='Rio Grande do Sul' value='RS' />
+          <Picker.Item label='Rondônia' value='RO' />
+          <Picker.Item label='Roraima' value='RR' />
+          <Picker.Item label='Santa Catarina' value='SC' />
+          <Picker.Item label='São Paulo' value='SP' />
+          <Picker.Item label='Sergipe' value='SE' />
+          <Picker.Item label='Tocantis' value='TO' />
+        </Picker>
+        <Picker
+          selectedValue={selectedCity}
           onValueChange={setSelectedCity}
-          useNativeAndroidPickerStyle={false}
-          placeholder={{ label: 'Cidade', value: '0' }}
-          items={cities}
-        />
+          style={pickerStyle}
+        >
+          <Picker.Item label="Selecione uma cidade" value="0" />
+          {cities.map(({ label }) => (
+            <Picker.Item key={String(label)} label={label} value={label} />
+          ))}
+        </Picker>
         <RectButton style={styles.button} onPress={handleNavigateToPoints}>
           <View style={styles.buttonIcon}>
             <Icon name='arrow-right' color='#fff' size={24} />
